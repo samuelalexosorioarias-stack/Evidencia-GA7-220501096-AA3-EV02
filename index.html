@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joyería Dala - Alta Joyería</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Encabezado Principal -->
+  <header class="header">
+    <div class="brand">
+      <h1 class="brand-title">JOYERÍA DALA</h1>
+      <span class="brand-sub">Alta Joyería desde 2026</span>
+    </div>
+    <nav class="nav-menu">
+      <a class="nav-link active" data-section="inicio">Inicio</a>
+      <a class="nav-link" data-section="productos">Productos</a>
+      <a class="nav-link" data-section="categorias">Categorías</a>
+      <a class="nav-link" data-section="contacto">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Buscar por joya..." class="search-bar">
+      </div>
+      <button class="cart-icon-btn" id="cartToggleBtn" title="Ver Carrito">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- SECCIÓN: INICIO -->
+    <section id="section-inicio" class="content-section active">
+      <div class="hero-banner">
+        <h2>Elegancia Atemporal en Oro de 18K</h2>
+        <p>Piezas exclusivas forjadas con precisión artesanal.</p>
+        <button class="btn-primary" id="btnExplore">Explorar Colección</button>
+      </div>
+
+      <div class="about-us">
+        <h3>Nuestra Filosofía</h3>
+        <p>En <strong>Joyería Dala</strong> confeccionamos piezas de orfebrería fina en oro con los más altos estándares de calidad.</p>
+      </div>
+
+      <h3 style="text-align:center; margin-bottom: 1.5rem;">Categorías Destacadas</h3>
+      <div class="featured-categories">
+        <!-- Anillos -->
+        <div class="feat-card" data-cat="Anillos">
+          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&auto=format&fit=crop" alt="Anillos">
+          <h4>Anillos de Oro</h4>
+        </div>
+        <!-- Cadenas -->
+        <div class="feat-card" data-cat="Cadenas">
+          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&auto=format&fit=crop" alt="Cadenas">
+          <h4>Cadenas y Tejidos</h4>
+        </div>
+        <!-- Pulseras -->
+        <div class="feat-card" data-cat="Pulseras">
+          <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=500&auto=format&fit=crop" alt="Pulseras">
+          <h4>Pulseras</h4>
+        </div>
+        <!-- Aretes -->
+        <div class="feat-card" data-cat="Aretes">
+          <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&auto=format&fit=crop" alt="Aretes y Topos">
+          <h4>Aretes y Topos</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: PRODUCTOS -->
+    <section id="section-productos" class="content-section">
+      <h2>Catálogo General de Joyas</h2>
+      <div id="productsGrid" class="products-grid"></div>
+    </section>
+
+    <!-- SECCIÓN: CATEGORÍAS & FILTROS -->
+    <section id="section-categorias" class="content-section">
+      <h2>Filtrado Avanzado de Catálogo</h2>
+      <div class="filter-layout">
+        <aside class="filter-sidebar">
+          <h4>Filtrar por:</h4>
+          <div class="filter-group">
+            <label>Categoría</label>
+            <select id="filterCategory" class="filter-select">
+              <option value="TODAS">Todas las categorías</option>
+              <option value="Anillos">Anillos</option>
+              <option value="Cadenas">Cadenas</option>
+              <option value="Pulseras">Pulseras</option>
+              <option value="Aretes">Aretes</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Estado</label>
+            <select id="filterStatus" class="filter-select">
+              <option value="TODOS">Todos</option>
+              <option value="Disponible">Disponible</option>
+              <option value="Stock Bajo">Stock Bajo</option>
+            </select>
+          </div>
+        </aside>
+        <div class="filter-results">
+          <div id="categoryProductsGrid" class="products-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: CONTACTO -->
+    <section id="section-contacto" class="content-section">
+      <h2>Atención al Cliente</h2>
+      <div class="contact-card">
+        <p><i class="fa-solid fa-location-dot"></i> <strong>Sede Principal:</strong> Cali, Colombia</p>
+        <p><i class="fa-solid fa-phone"></i> <strong>Línea WhatsApp:</strong> +57 314 5033726</p>
+        <p><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> contacto@joyeriadala.co</p>
+        <button class="btn-primary" id="btnWspDirect">Escribir por WhatsApp Directo</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL DETALLE PRODUCTO -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModalBtn">&times;</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- DRAWER CARRITO -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>Tu Carrito de Compras</h3>
+      <button class="cart-close" id="closeCartBtn">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total:</span>
+        <strong id="cartTotal">$0 COP</strong>
+      </div>
+      <button class="btn-buy" id="checkoutBtn">Proceder al Pago / WhatsApp</button>
+    </div>
+  </aside>
+
+  <!-- MODAL CHECKOUT -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeCheckoutBtn">&times;</button>
+      <h3>Datos para la Orden</h3>
+      <form id="checkoutForm">
+        <div class="form-group">
+          <label>Nombre Completo *</label>
+          <input type="text" id="clientName" required class="form-input" placeholder="Ej: Samuel Osorio">
+        </div>
+        <div class="form-group">
+          <label>Teléfono *</label>
+          <input type="tel" id="clientPhone" required class="form-input" placeholder="Ej: 3001234567">
+        </div>
+        <div class="form-group">
+          <label>Dirección de Entrega *</label>
+          <input type="text" id="clientAddress" required class="form-input" placeholder="Ej: Calle 5 # 12-34, Cali">
+        </div>
+        <div class="form-group">
+          <label>Método de Pago Preferido *</label>
+          <select id="paymentMethod" required class="form-input">
+            <option value="" disabled selected>-- Seleccione Método de Pago --</option>
+            <option value="Nequi / Daviplata">Nequi / Daviplata</option>
+            <option value="Transferencia Bancaria (Bancolombia / PSE)">Transferencia Bancaria (Bancolombia / PSE)</option>
+            <option value="Tarjeta de Crédito / Débito">Tarjeta de Crédito / Débito</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">
+          Confirmar y Enviar Pedido por WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 Joyería Dala - Todos los derechos reservados</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
